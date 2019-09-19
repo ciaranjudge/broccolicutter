@@ -32,5 +32,5 @@ dependencies:
   - scikit-learn
   - scipy
   # I/O
-  - pyreadstat
+  - pyreadstat 
   - xlrd
