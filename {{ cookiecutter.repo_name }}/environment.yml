@@ -1,0 +1,36 @@
+name: base
+
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  # Formatting, refactoring, linting
+  - black
+  - pylint
+  - rope
+  # Testing and automation
+  - cookiecutter
+  - great-expectations
+  - intake
+  - marshmallow
+  - prefect
+  - pytest
+  # Jupyter 
+  - ipywidgets
+  - jupyterlab
+  - jupytext
+  - papermill
+  # Visualisation
+  - altair
+  - matplotlib
+  - seaborn
+  # Data science
+  - dask
+  - numpy
+  - pandas
+  - scikit-learn
+  - scipy
+  # I/O
+  - pyreadstat
+  - xlrd
