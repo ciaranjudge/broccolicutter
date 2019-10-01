@@ -20,6 +20,7 @@ dependencies:
   - ipywidgets
   - jupyterlab
   - jupytext
+  - nodejs
   - papermill
   # Visualisation
   - altair
@@ -32,5 +33,7 @@ dependencies:
   - scikit-learn
   - scipy
   # I/O
+  - beautifulsoup4
+  - lxml
   - pyreadstat 
   - xlrd
