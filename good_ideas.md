@@ -24,4 +24,4 @@
 - Automated imports of some of the most common packages (e.g. pandas)?
 - Set up jupytext
 - Set up nice defaults for everything - especially Jupyter!
-
+- Enable extension manager in Jupyter?
