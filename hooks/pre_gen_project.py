@@ -1,3 +1,6 @@
+# This is the example 'validating template variables' script from 
+# https://cookiecutter.readthedocs.io/en/latest/advanced/hooks.html
+
 import re
 import sys
 
