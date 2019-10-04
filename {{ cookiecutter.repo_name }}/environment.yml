@@ -36,6 +36,7 @@ dependencies:
   - beautifulsoup4
   - lxml
   - pyreadstat 
+  - tabula-py
   - xlrd
   # Security
   - python-dotenv
