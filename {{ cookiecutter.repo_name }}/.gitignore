@@ -38,8 +38,8 @@ target/
 # Pycharm
 .idea
 
-# VS Code
-.vscode/
+# # VS Code
+# .vscode/
 
 # Spyder
 .spyproject/
