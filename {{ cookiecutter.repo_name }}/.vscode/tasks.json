@@ -1,0 +1,26 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Update conda environment",
+            "type": "shell",
+            "command": "./scripts/launch_conda_update.sh",
+            "windows": {
+                "command": "${workspaceFolder}\\_config_scripts\\launch_conda_update.bat"
+            },
+            "options": {
+            },
+            "problemMatcher": [],
+            "runOptions": {
+                "runOn": "folderOpen"
+              },
+            "isBackground": false,
+            "presentation": {
+                "echo": true
+            }
+            
+        }
+    ]
+}
