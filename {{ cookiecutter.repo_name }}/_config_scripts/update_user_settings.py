@@ -29,7 +29,7 @@ def update_json_settings(
     # TODO Return code based on success or failure
 
 def update_vscode_user_settings(
-    template_settings_path = Path(".scripts/.user_config_templates/settings.json"),
+    template_settings_path = Path(".scripts/.user_config_templates/vscode_user_settings_template.json"),
     target_settings_path = Path(os.environ["APPDATA"]) / "Code/User" / "settings.json"
 ):
     """Convenience wrapper for update_json_settings() with useful defaults for vscode settings
