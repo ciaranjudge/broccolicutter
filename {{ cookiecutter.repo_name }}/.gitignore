@@ -2,6 +2,12 @@
 __pycache__/
 *.py[cod]
 
+# test cache
+.cache/*
+tests/__pycache__/*
+_config_scripts/__pycache__/*
+*.pytest_cache/
+
 # PyInstaller
 #  Usually these files are written by a python script from a template
 #  before PyInstaller builds the exe, so as to inject date/other infos into it.
@@ -24,6 +30,7 @@ coverage.xml
 
 # Sphinx documentation
 docs/_build/
+docs/site/
 
 # PyBuilder
 target/
