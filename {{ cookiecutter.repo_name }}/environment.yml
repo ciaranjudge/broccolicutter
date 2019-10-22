@@ -5,38 +5,47 @@ channels:
   - defaults
 
 dependencies:
+  # Python
+  - python=3.7 # Want to use 3.8 but some packages not ready yet
+
   # Formatting, refactoring, linting
-  - black
-  - pylint
-  - rope
+  - black # Auto code formatter https://github.com/psf/black
+  - pylint # Static code analysis https://www.pylint.org/
+  - rope # Code refactoring https://github.com/python-rope/rope
+
   # Testing and automation
-  - cookiecutter
-  - great-expectations
-  - intake
-  - marshmallow
-  - prefect
+  - cookiecutter # Create project from git template https://github.com/cookiecutter/cookiecutter 
+  - great-expectations # Pipeline tests for data https://github.com/great-expectations/great_expectations
+  - intake # Tools for loading and sharing data https://pypi.org/project/intake/
+  - marshmallow # Data marshalling & schema validation https://marshmallow.readthedocs.io
+  - prefect # 
   - pytest
+
   # Jupyter 
   - ipywidgets
   - jupyterlab
   - jupytext
   - nodejs
   - papermill
+
   # Visualisation
   - altair
   - matplotlib
   - seaborn
+
   # Data science
   - dask
   - numpy
   - pandas
   - scikit-learn
   - scipy
+
   # I/O
   - beautifulsoup4
   - lxml
   - pyreadstat 
   - tabula-py
   - xlrd
+  
   # Security
   - python-dotenv
