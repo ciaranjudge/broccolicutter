@@ -1,0 +1,7 @@
+{
+    "terminal.integrated.shellArgs.windows": [
+        "/K", "%LOCALAPPDATA%\\Continuum\\miniconda3\\Scripts\\activate.bat", 
+        "%LOCALAPPDATA%\\Continuum\\miniconda3\\envs\\broccolicutter"
+    ], 
+    "python.pythonPath": "C:\\Users\\ciaranjudge\\AppData\\Local\\Continuum\\miniconda3\\envs\\broccolicutter\\python.exe"
+}
