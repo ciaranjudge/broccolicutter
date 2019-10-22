@@ -1,98 +1,114 @@
-# Cookiecutter Data Science
+# Cookiecutter Data Science DEASP
 
-_A logical, reasonably standardized, but flexible project structure for doing and sharing data science work._
-
-
-#### [Project homepage](http://drivendata.github.io/cookiecutter-data-science/)
+_Experimental fork of the cookiecutter-data-science project,_
+_for data science teams in Dept of Employment Affairs & Social Protection, Ireland_
 
 
-### Requirements to use the cookiecutter template:
------------
- - Python 2.7 or 3.5
- - [Cookiecutter Python package](http://cookiecutter.readthedocs.org/en/latest/installation.html) >= 1.4.0: This can be installed with pip by or conda depending on how you manage your Python packages:
-
-``` bash
-$ pip install cookiecutter
-```
-
-or
-
-``` bash
-$ conda config --add channels conda-forge
-$ conda install cookiecutter
-```
+#### [Original project homepage](http://drivendata.github.io/cookiecutter-data-science/)
 
 
 ### To start a new project, run:
 ------------
 
-    cookiecutter https://github.com/drivendata/cookiecutter-data-science
+    cookiecutter https://github.com/ciaranjudge/cookiecutter-data-science-deasp
 
 
-[![asciicast](https://asciinema.org/a/244658.svg)](https://asciinema.org/a/244658)
+# opinionated-data-science-setup
 
+Sensible setup for doing data science stuff with python, conda, and Visual Studio Code
 
-### The resulting directory structure
-------------
+## A. User dektop setup
 
-The directory structure of your new project looks like this: 
+### 1. Set some useful environment variables
 
-```
-├── LICENSE
-├── Makefile           <- Makefile with commands like `make data` or `make train`
-├── README.md          <- The top-level README for developers using this project.
-├── data
-│   ├── external       <- Data from third party sources.
-│   ├── interim        <- Intermediate data that has been transformed.
-│   ├── processed      <- The final, canonical data sets for modeling.
-│   └── raw            <- The original, immutable data dump.
-│
-├── docs               <- A default Sphinx project; see sphinx-doc.org for details
-│
-├── models             <- Trained and serialized models, model predictions, or model summaries
-│
-├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
-│                         the creator's initials, and a short `-` delimited description, e.g.
-│                         `1.0-jqp-initial-data-exploration`.
-│
-├── references         <- Data dictionaries, manuals, and all other explanatory materials.
-│
-├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
-│   └── figures        <- Generated graphics and figures to be used in reporting
-│
-├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
-│                         generated with `pip freeze > requirements.txt`
-│
-├── src                <- Source code for use in this project.
-│   ├── __init__.py    <- Makes src a Python module
-│   │
-│   ├── data           <- Scripts to download or generate data
-│   │   └── make_dataset.py
-│   │
-│   ├── features       <- Scripts to turn raw data into features for modeling
-│   │   └── build_features.py
-│   │
-│   ├── models         <- Scripts to train models and then use trained models to make
-│   │   │                 predictions
-│   │   ├── predict_model.py
-│   │   └── train_model.py
-│   │
-│   └── visualization  <- Scripts to create exploratory and results oriented visualizations
-│       └── visualize.py
-│
-└── tox.ini            <- tox file with settings for running tox; see tox.testrun.org
-```
+- Miniconda install location
+- Easy way to say "cookiecutter [opinionated-cookiecutter]'
+  - Cookiecutter config!
+  - Create in repos folder (c:\repos)
+  - Open VSCode once created
 
-## Contributing
+### 2. Conda user-level settings
 
-We welcome contributions! [See the docs for guidelines](https://drivendata.github.io/cookiecutter-data-science/#contributing).
+- Are you in a corporate environment? If so, fix SSL issue in .condarc
+- Make base conda environment read-only by setting 'conda-meta/history' to read-only
+- Add *essential* extra packages to base env cookiecutter
 
-### Installing development requirements
-------------
+### 3. Visual Studio Code user-level settings
 
-    pip install -r requirements.txt
+- Terminal should launch base env
+- base env is default python kernel?
+  - Maybe no default is better option?
+  - NB Jupyter is deliberately not included so can't do interactive window!
 
-### Running the tests
-------------
+### 4. Visual Studio Code extensions
 
-    py.test tests
+- Create extensions.yml file and then iterate over it using code --install
+- Extensions working list
+  - eamodio.gitlens
+  - ms-python.python
+  - ms-vscode-remote.vscode-remote-extensionpack
+  - ms-vsts.team
+  - redhat.vscode-yaml
+  - 
+
+- Other possible stuff
+  - Font ligatures
+
+## B. Project update stuff
+
+### 1. Conda update
+
+- Activate base environment
+
+- Make base environment writeable using 'conda-meta/history'
+- conda update conda
+- Update --all from ".conda/base-environment.yml"
+- Make base environment read-only
+
+- If "envs/[project-env]" exists:
+  - Remove read-only flag from "envs/[project-env]/conda-meta/history"
+  - Update using environment.yml
+- Else conda install from environment.yml
+  - Export exact environment as environment-pinned.yml
+  - Set read-only flag on "envs/[project-env]/conda-meta/history"
+
+### Jupyter update
+
+- Activate project environment
+
+- If Jupyter environment exists:
+  - Remove read-only flag (*what to use for flag?*)
+  - clean
+  - Update all from jupyter-env.yml (*whatever this is exactly?!*)
+  - *Need to check for each extension if it's update or install that's needed?*
+  - build
+- Else install from jupyter-env.yml
+  - *Maybe this branching isn't needed if extensions are just dealt with one-by-one?*
+
+- *Where to install Jupyter environment?!*
+
+### Visual Studio Code task(s)
+
+- conda update
+- Jupyter update
+
+## D. Project cookiecutter stuff
+
+### Misc
+
+- Make sure a new git repo is automatically initiated when creating new project
+- Add good default settings for things like matplotlib
+
+### Conda environment
+
+- Jupyter config and environment file locations
+  - <https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#saving-environment-variables>
+
+### Jupyter lab environment
+
+<!-- - Want to think about  -->
+
+### Visual Studio Code project-level settings
+
+- Terminal should launch project conda env
+- Project env is project python kernel
