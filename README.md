@@ -10,7 +10,7 @@ _for data science teams in Dept of Employment Affairs & Social Protection, Irela
 ### To start a new project, run:
 ------------
 
-    cookiecutter https://github.com/ciaranjudge/cookiecutter-data-science-deasp
+    cookiecutter https://github.com/ciaranjudge/broccolicutter
 
 
 # opinionated-data-science-setup
