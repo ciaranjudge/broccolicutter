@@ -1,10 +1,8 @@
-# Cookiecutter Data Science DEASP
+# Broccolicutter
 
-_Experimental fork of the cookiecutter-data-science project,_
-_for data science teams in Dept of Employment Affairs & Social Protection, Ireland_
+Opinionated data science cookiecutter that enforces good practices with conda, VSCode, Jupyter, and git.
 
-
-#### [Original project homepage](http://drivendata.github.io/cookiecutter-data-science/)
+Experimental fork of [cookiecutter-data-science](http://drivendata.github.io/cookiecutter-data-science/)
 
 
 ### To start a new project, run:
