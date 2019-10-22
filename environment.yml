@@ -1,0 +1,13 @@
+name: broccolicutter
+
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  - cookiecutter
+  - black
+  - hypothesis
+  - pylint
+  - pytest
+  - pyyaml
