@@ -1,0 +1,12 @@
+name: jjjjj
+
+extensions:
+  - "@jupyter-widgets/jupyterlab-manager"
+  - "@jupyter-voila/jupyterlab-preview"
+  - "@jupyterlab/toc"
+  # - "@jupyterlab/latex" #need xelatex or pdflatex in conda
+  - "jupyterlab-drawio"
+  - "@jupyter-widgets/jupyterlab-manager" #needed for ipysheet
+  # - ipysheet #also need ipysheet in conda
+  - "@pyviz/jupyterlab_pyviz"
+  # - Jupytext not in this list as extension gets auto-installed with jupytext conda
