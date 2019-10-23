@@ -8,7 +8,7 @@
             "type": "shell",
             "command": "./scripts/launch_conda_update.sh",
             "windows": {
-                "command": "${workspaceFolder}\\{{ cookiecutter.repo_name }}\\_config_scripts\\launch_conda_update.bat"
+                "command": "${workspaceFolder}\\_config_scripts\\launch_conda_update.bat"
             },
             "options": {
             },
