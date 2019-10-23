@@ -1,33 +1,79 @@
+# Standard library
 from pathlib import Path
 import os
 from stat import S_IREAD, S_IWRITE  # File permission flag settings
 import subprocess  # Run shell commands (cross-platform)
-import yaml
+
+# Local packages
+from read_yml import read_yml
+
+def set_env_vars(
+    env_vars: dict, 
+    env_path: Path = Path(os.environ["conda_prefix"]),
+    enforce_readonly: bool = True
+):
+    """Set environment variables for this conda environment.
+    Based on "saving-environment-variables" section in 
+    https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html
+    Easiest to run this from the conda env that env vars are being set for!
+    """
+    activate_dir = env_path / "etc" / "conda" / "activate.d"
+    activate_dir.mkdir(parents=True, exist_ok=True)
+    Path.touch(activate_dir / "env_vars.sh") # Unix (Linux/Mac)
+    Path.touch(activate_dir / "env_vars.bat") # Windows
+    activate_sh = ["#!/bin/sh\n"] # Unix (Linux/Mac)
+    activate_bat = [""] # Windows
+
+    deactivate_dir = env_path / "etc" / "conda" / "deactivate.d"
+    deactivate_dir.mkdir(parents=True, exist_ok=True)
+    Path.touch(deactivate_dir / "env_vars.sh") # Unix (Linux/Mac)
+    Path.touch(deactivate_dir / "env_vars.bat") # Windows
+    deactivate_sh = ["#!/bin/sh\n"] # Unix (Linux/Mac)
+    deactivate_bat = [""] # Windows
+
+    for var, val in env_vars.items():
+        # TODO Make sure paths are output correctly for OS, especially env vars ($ %%)
+        # Need generic per-OS paths
+        # Effectively means paths relative to predefined OS environ vars
+
+        # TODO Make sure that any already set variables are kept when adding new ones!
+        # Unix (Linux/Mac)
+        activate_sh += f"export {var}={val}\n"
+        deactivate_sh += f"unset {var}\n"
+
+        # Windows
+        activate_bat += f"set {var}={val}\n"
+        deactivate_bat += f"set {var}=\n"
+
+    with open(activate_dir / "env_vars.sh", 'w+') as f:
+        f.writelines(activate_sh) 
+    with open(activate_dir / "env_vars.bat", 'w+') as f:
+        f.writelines(activate_bat)
+
+    with open(deactivate_dir / "env_vars.sh", 'w+') as f:
+        f.writelines(deactivate_sh) 
+    with open(deactivate_dir / "env_vars.bat", 'w+') as f:
+        f.writelines(deactivate_bat)   
+
 
 def update_project_env(
-    environment_yml: Path = Path("environment.yml"),
+    yml_file: Path = Path("environment.yml"),
     conda_prefix: Path = Path(os.environ["conda_prefix"]),
     enforce_readonly: bool = True,
-) -> None: # TODO Return code based on success/failure
+) -> None: # TODO Return code based on success/failure (for command line use)
     """Given an environment.yml file that specifies a named conda env,
     update the env based on the yml file packages (or create the env if it doesn't exist).
     Make the env temporarily writeable while updating,
     then make it read-only again afterwards if enforce_readonly flag is set.
     """
-    # *Get env name from supplied environment_yml file
-    # TODO Raise exception if environment_yml name missing.
+    # *Get env name from yml_file
+    # TODO Raise exception if yml_file name field missing.
     # TODO Raise exception if no dependencies specified. This creates blank env and is bad!
-    with open(environment_yml) as f:
-        try:
-            data = yaml.load(f, Loader=yaml.FullLoader)
-            env_name = data["name"]
-            print(f"Found environment file for {env_name} at {environment_yml.resolve()}")
-        except FileNotFoundError:
-            print(f"Can't find environment file at {environment_yml.resolve()}")
-        except (yaml.YAMLError, yaml.MarkedYAMLError) as e:
-            print("Something's wrong with the yaml in the environment file!")
-            print(e)
-
+    # read_yml() is a convenience wrapper for yaml.load()
+    # It catches FileNotFoundError, yaml.YAMLError, yaml.MarkedYAMLError
+    environment_yml = read_yml(yml_file)
+    env_name = environment_yml['name']
+    print(f"Found environment file for {env_name} at {yml_file.resolve()}")
 
     # *Envs should be read-only to enforce using environment.yml for specifying packages.
     # If "conda-meta/history" is read-only, conda knows the env is read-only.
@@ -59,66 +105,13 @@ def update_project_env(
         # Path.touch(filename) creates a blank file if there isn't one already!
         Path.touch(env_canaryfile)
 
+    # TODO Set environment variables (in environment.yml!) after env is updated.
+    # TODO Suppress unhelpful "EnvironmentSectionNotValid" warning from conda
+
     # Finally, make both the project env and base canaryfile read-only again.
     os.chmod(env_canaryfile, S_IREAD)
     os.chmod(base_canaryfile, S_IREAD)
 
 
-def set_env_vars(
-    env_vars: dict, 
-    env_path: Path = Path(os.environ["conda_prefix"]),
-    enforce_readonly: bool = True
-):
-    """Set environment variables for this conda environment.
-    Based on "saving-environment-variables" section in 
-    https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html
-    Easiest to run this from the conda env that env vars are being set for!
-    """
-    activate_dir = env_path / "etc" / "conda" / "activate.d"
-    activate_dir.mkdir(parents=True, exist_ok=True)
-    Path.touch(activate_dir / "env_vars.sh") # Unix (Linux/Mac)
-    Path.touch(activate_dir / "env_vars.bat") # Windows
-    activate_sh = ["#!/bin/sh\n"] # Unix (Linux/Mac)
-    activate_bat = [""] # Windows
-
-    deactivate_dir = env_path / "etc" / "conda" / "deactivate.d"
-    deactivate_dir.mkdir(parents=True, exist_ok=True)
-    Path.touch(deactivate_dir / "env_vars.sh") # Unix (Linux/Mac)
-    Path.touch(deactivate_dir / "env_vars.bat") # Windows
-    deactivate_sh = ["#!/bin/sh\n"] # Unix (Linux/Mac)
-    deactivate_bat = [""] # Windows
-
-    for var, val in env_vars.items():
-        # TODO Make sure paths are output correctly for OS
-        # Need generic per-OS paths
-        # Effectively means paths relative to predefined OS environ vars
-
-        # Unix (Linux/Mac)
-        activate_sh += f"export {var}={val}\n"
-        deactivate_sh += f"unset {var}\n"
-
-        # Windows
-        activate_bat += f"set {var}={val}\n"
-        deactivate_bat += f"set {var}=\n"
-
-    with open(activate_dir / "env_vars.sh", 'w+') as f:
-        f.writelines(activate_sh) 
-    with open(activate_dir / "env_vars.bat", 'w+') as f:
-        f.writelines(activate_bat)
-
-    with open(deactivate_dir / "env_vars.sh", 'w+') as f:
-        f.writelines(deactivate_sh) 
-    with open(deactivate_dir / "env_vars.bat", 'w+') as f:
-        f.writelines(deactivate_bat)   
-
-    # TODO Make everything read-only if flag set
-    # TODO Make this whole thing neater!
 
 
-# for var, val in os.environ.items():
-#     print("Var: ", var, "Val: ", val)
-# update_base_env()
-# update_env()
-
-env_vars = {"test_var": "val", "test_path": Path.cwd()}
-set_env_vars(env_vars)
