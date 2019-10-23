@@ -49,3 +49,6 @@ dependencies:
   
   # Security
   - python-dotenv
+
+environment_variables:
+  jupyter_config_dir: "%CONDA_PREFIX%\\envs\\{{cookiecutter.repo_name}}\\Jupyter"

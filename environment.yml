@@ -11,3 +11,6 @@ dependencies:
   - pylint
   - pytest
   - pyyaml
+
+# environment_variables:
+#   jupyter_config_dir: "%CONDA_PREFIX%\\envs\\jjjjj\\Jupyter"
