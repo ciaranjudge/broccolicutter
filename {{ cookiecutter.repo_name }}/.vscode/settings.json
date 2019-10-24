@@ -3,5 +3,5 @@
         "/K", "%LOCALAPPDATA%\\Continuum\\miniconda3\\Scripts\\activate.bat", 
         "%LOCALAPPDATA%\\Continuum\\miniconda3\\envs\\{{ cookiecutter.repo_name }}"
     ], 
-    "python.pythonPath": "C:\\Users\\ciaranjudge\\AppData\\Local\\Continuum\\miniconda3\\envs\\{{ cookiecutter.repo_name }}\\python.exe"
+    "python.pythonPath": "%LOCALAPPDATA%\\Continuum\\miniconda3\\envs\\{{ cookiecutter.repo_name }}\\python.exe"
 }
