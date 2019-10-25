@@ -9,7 +9,7 @@ Experimental fork of [cookiecutter-data-science](http://drivendata.github.io/coo
 
     cookiecutter https://github.com/ciaranjudge/broccolicutter
     
-    [Test download link]https://raw.githubusercontent.com/ciaranjudge/broccolicutter/master/_config_scripts/initial_setup.bat
+[Test download link]https://raw.githubusercontent.com/ciaranjudge/broccolicutter/master/_config_scripts/initial_setup.bat
 
 
 # opinionated-data-science-setup
