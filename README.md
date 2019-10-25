@@ -4,11 +4,13 @@ Opinionated data science cookiecutter that enforces good practices with conda, V
 
 Experimental fork of [cookiecutter-data-science](http://drivendata.github.io/cookiecutter-data-science/)
 
-
 ### To start a new project, run:
 ------------
 
     cookiecutter https://github.com/ciaranjudge/broccolicutter
+    
+    Test download link
+    https://raw.githubusercontent.com/ciaranjudge/broccolicutter/master/_config_scripts/initial_setup.bat
 
 
 # opinionated-data-science-setup
